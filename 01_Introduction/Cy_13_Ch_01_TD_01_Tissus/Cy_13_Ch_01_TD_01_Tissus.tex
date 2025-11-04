@@ -162,6 +162,8 @@ paramètres qui transitent entre les blocs.
 %%%%%%%%%%%%%%%
 \fi
 
+\question{Le système est-il asservi ? Pourquoi ? Le système répond-il aux hypothèses des SLCI (Systèmes Linéaires Continus Invariants) ?}
+
 \begin{question}
 On note $K_a$ le gain de l'adaptateur et $K_c$ le gain du capteur. Quelle doit être la relation entre 
 $K_a$ et $K_c$ pour que l'écart soit nul lorsque la vitesse du moteur est égale à la vitesse de consigne ?
@@ -222,7 +224,7 @@ $E(p) = k_e\Omega_m(p)$.
 \else
 \fi
 
-
+\question{Le moteur à courant continu seul est-il asservi ? Pourquoi ?}
 
 
 \begin{question}
@@ -261,80 +263,94 @@ correcteur permettant de vérifier l’exigence 1.2.2.1.
 Le correcteur de l’asservissement en vitesse du moteur est un proportionnel-intégrateur de fonction
 de transfert $\indice{H}{cor}(p) = K_p+\dfrac{K_i}{p}$.
 
+La fonction de transfert en boucle fermée est donnée par 
+$\indice{H}{BF}(p) = \dfrac{\Omega_m(p)}{\indice{\Omega}{cons}(p)} =  \dfrac{K_c\indice{H}{cor}(p) K}{1+\dfrac{2\xi}{\omega_0}p+\dfrac{p^2}{\omega_0^2}+ \indice{H}{cor}(p) K_c}$
+
+\question{Mettre $\indice{H}{BF}(p)$ sous forme canonique. Donner son gain statique, son ordre et sa classe.}
+
+\question{Déterminer la valeur finale de $\omega_m(t)$ pour une entrée indicielle. Conclure vis-à-vis du cahier des charges}
+
+\question{Déterminer la valeur finale de $\omega_m(t)$ pour une entrée rampe de pente 1.}
+
+
+
+\subsection*{Evaluation graphique des performances}
+
 Les résultats de simulation de la réponse du moteur $\indice{N}{m}(t)$, en boucle fermée, pour une entrée échelon
 d’amplitude $N_0 = \SI{3 000}{tr.min^{-1}}$ pour différentes valeurs de $K_p$ et de $K_i$ sont donnés sur la figure \ref{cy_01_ch_02_03_td_03_fig_05}.
 
 
 \fi
 
-\begin{marginfigure}[-3cm]
-\centering
+%\begin{marginfigure}[-3cm]
+%\centering
+\begin{figure}[!h]
 \includegraphics[width=\linewidth]{fig_05}
-\caption{Évolutions simulées de $\omega_m(t)$.}
-\label{cy_01_ch_02_03_td_03_fig_05}
-\end{marginfigure}
+\caption{Évolutions simulées de $\omega_m(t)$.
+\label{cy_01_ch_02_03_td_03_fig_05}}
+\end{figure}
 
 
-
-
-\begin{question}
-Pour les courbes 1 et 2 de la figure \ref{cy_01_ch_02_03_td_03_fig_05}, préciser, en le justifiant, la simulation qui est associée à la plus grande
-valeur de $K_p$. On pourra exprimer le coefficient d'amortissement de la FTBF ou exprimer l'écart statique.
-\end{question}
-\ifprof
-\begin{corrige}
-\textbf{Méthode 1 -- Coefficient d'amortissement}
-
-On note $\indice{H}{BF}(p) = \dfrac{\omega_m(t)}{\indice{\omega}{cons}(t)}$.
-
-
-On a alors, $\indice{H}{BF}(p) = K_c \dfrac{K_p \ordredeux }{1+K_p \ordredeux  K_c}$
-$=  \dfrac{K_cK_p K}{1+\dfrac{2\xi}{\omega_0}p+\dfrac{p^2}{\omega_0^2}+K_p K_c}$.
-
-On a donc $\dfrac{2\indice{\xi}{BF}}{\indice{\omega}{BF}} = \dfrac{2\xi}{\omega_0\left(1+K_p K_c\right)}$
-et $\indice{\omega}{BF}^2 = \omega_0^2 \left(1+K_p K_c\right)$.
-
-Soit
-$\indice{\xi}{BF} = \dfrac{\xi\indice{\omega}{BF}}{\omega_0\left(1+K_p K_c\right)}$ 
-$= \dfrac{\xi\omega_0\sqrt{1+K_p K_c}}{\omega_0\left(1+K_p K_c\right)}$ 
-$= \dfrac{\xi}{\omega_0\sqrt{1+K_p K_c}}$.
-
-En conclusion, plus $K_p$ augmente, plus le coefficient d'amortissement diminue et donc plus les pseudo oscillations deviennent grandes. La courbe 2 a donc la plus grande valeur de $K_p$.
-
-\textbf{Méthode 2 -- Calcul de l'écart statique}
-
-On montre que $\varepsilon(p) = \indice{\omega}{cons}(p) K_a \dfrac{1}{1+FTBO(p)}$
-$= \dfrac{\indice{\omega}{cons}(p) K_a}{1+K_p K_c\ordredeux }$.
-
-Pour une entrée échelon et en utilisant le théorème de la valeur finale, on a 
-$\varepsilon_S =  \lim\limits_{t\to +\infty} = \varepsilon(t) = \lim\limits_{p\to 0} p \varepsilon(p)$
-$\lim\limits_{p\to 0} \dfrac{ K_a}{1+K_p K_c\ordredeux } = \dfrac{K_a}{1+K_p K_c K}$.
-
-Lorsque $K_p$ augmente, $ \varepsilon_S$ diminue. La courbe 2 a donc la plus grande valeur de $K_p$.
-
-
-
-\end{corrige}
-\else
-\fi
-
-\begin{question}
-Pour chaque courbe de la figure \ref{cy_01_ch_02_03_td_03_fig_05}, préciser, en le justifiant, si la valeur de $K_i$ est nulle ou non.
-\end{question}
-\ifprof
-\begin{corrige}
-On montre que $\varepsilon(p) = \indice{\omega}{cons}(p) K_a \dfrac{1}{1+FTBO(p)}$
-$= \dfrac{\indice{\omega}{cons}(p) K_a}{1+\left( K_p + \dfrac{K_i}{p}\right) K_c\ordredeux }$.
-
-Pour une entrée échelon et en utilisant le théorème de la valeur finale, on a 
-$\varepsilon_S =  \lim\limits_{t\to +\infty} = \varepsilon(t) = \lim\limits_{p\to 0} p \varepsilon(p) = 0$.
-Ainsi, si $K_i$ non nul, $\varepsilon_S  =0$ (courbe 3 uniquement).
-
-\end{corrige}
-\else
-\fi
-
-
+%
+%
+%\begin{question}
+%Pour les courbes 1 et 2 de la figure \ref{cy_01_ch_02_03_td_03_fig_05}, préciser, en le justifiant, la simulation qui est associée à la plus grande
+%valeur de $K_p$. On pourra exprimer le coefficient d'amortissement de la FTBF ou exprimer l'écart statique.
+%\end{question}
+%\ifprof
+%\begin{corrige}
+%\textbf{Méthode 1 -- Coefficient d'amortissement}
+%
+%On note $\indice{H}{BF}(p) = \dfrac{\Omega_m(p)}{\indice{\Omega}{cons}(p)}$.
+%
+%
+%On a alors, $\indice{H}{BF}(p) = K_c \dfrac{K_p \ordredeux }{1+K_p \ordredeux  K_c}$
+%$=  \dfrac{K_cK_p K}{1+\dfrac{2\xi}{\omega_0}p+\dfrac{p^2}{\omega_0^2}+K_p K_c}$.
+%
+%On a donc $\dfrac{2\indice{\xi}{BF}}{\indice{\omega}{BF}} = \dfrac{2\xi}{\omega_0\left(1+K_p K_c\right)}$
+%et $\indice{\omega}{BF}^2 = \omega_0^2 \left(1+K_p K_c\right)$.
+%
+%Soit
+%$\indice{\xi}{BF} = \dfrac{\xi\indice{\omega}{BF}}{\omega_0\left(1+K_p K_c\right)}$ 
+%$= \dfrac{\xi\omega_0\sqrt{1+K_p K_c}}{\omega_0\left(1+K_p K_c\right)}$ 
+%$= \dfrac{\xi}{\omega_0\sqrt{1+K_p K_c}}$.
+%
+%En conclusion, plus $K_p$ augmente, plus le coefficient d'amortissement diminue et donc plus les pseudo oscillations deviennent grandes. La courbe 2 a donc la plus grande valeur de $K_p$.
+%
+%\textbf{Méthode 2 -- Calcul de l'écart statique}
+%
+%On montre que $\varepsilon(p) = \indice{\omega}{cons}(p) K_a \dfrac{1}{1+FTBO(p)}$
+%$= \dfrac{\indice{\omega}{cons}(p) K_a}{1+K_p K_c\ordredeux }$.
+%
+%Pour une entrée échelon et en utilisant le théorème de la valeur finale, on a 
+%$\varepsilon_S =  \lim\limits_{t\to +\infty} = \varepsilon(t) = \lim\limits_{p\to 0} p \varepsilon(p)$
+%$\lim\limits_{p\to 0} \dfrac{ K_a}{1+K_p K_c\ordredeux } = \dfrac{K_a}{1+K_p K_c K}$.
+%
+%Lorsque $K_p$ augmente, $ \varepsilon_S$ diminue. La courbe 2 a donc la plus grande valeur de $K_p$.
+%
+%
+%
+%\end{corrige}
+%\else
+%\fi
+%
+%\begin{question}
+%Pour chaque courbe de la figure \ref{cy_01_ch_02_03_td_03_fig_05}, préciser, en le justifiant, si la valeur de $K_i$ est nulle ou non.
+%\end{question}
+%\ifprof
+%\begin{corrige}
+%On montre que $\varepsilon(p) = \indice{\omega}{cons}(p) K_a \dfrac{1}{1+FTBO(p)}$
+%$= \dfrac{\indice{\omega}{cons}(p) K_a}{1+\left( K_p + \dfrac{K_i}{p}\right) K_c\ordredeux }$.
+%
+%Pour une entrée échelon et en utilisant le théorème de la valeur finale, on a 
+%$\varepsilon_S =  \lim\limits_{t\to +\infty} = \varepsilon(t) = \lim\limits_{p\to 0} p \varepsilon(p) = 0$.
+%Ainsi, si $K_i$ non nul, $\varepsilon_S  =0$ (courbe 3 uniquement).
+%
+%\end{corrige}
+%\else
+%\fi
+%
+%
 
 
 \begin{question}

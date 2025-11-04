@@ -1,0 +1,205 @@
+% "{'chapitre':'slci_laplace','classe':('PSI'),'type':('td'),'titre':'Système EOS', 'source':'Concours Banque PT SIA 2016','comp':['SLCI-02','SLCI-07','SLCI-08'],'corrige':False}"
+
+% Comp ci dessus à revoir
+\setchapterimage{fig_00}
+
+
+\renewcommand{\titrechapitre}{Système EOS}
+
+\chapter*{TD \arabic{cptTD} \\ 
+\titrechapitre\,-- \ifprof Corrigé \else Sujet \fi}
+\addcontentsline{toc}{section}{TD \arabic{cptTD} : \titrechapitre -- \ifprof Corrigé \else Sujet \fi}
+
+\iflivret \stepcounter{cptTD} \else
+\ifprof  \stepcounter{cptTD} \else \fi \fi
+
+\renewcommand{\leftmark}{\titrechapitre}
+\renewcommand{\rightmark}{\titrechapitre}
+
+
+\setcounter{question}{0}
+
+\marginnote{\textit{Concours Banque PT SIA 2016.}}
+%\marginnote{\UPSTIcompetence[2]{B2-07}}
+\marginnote{\xpComp{SLCI}{02}\xpComp{SLCI}{07}\xpComp{SLCI}{08} -- À vérifier}
+
+
+
+\begin{marginfigure}
+\centering
+\includegraphics[width=.9\linewidth]{fig_01}
+\end{marginfigure}
+
+EOS est un système d’imagerie qui permet l’acquisition simultanée de radiographies de face et de profil du corps entier (ou d’une zone anatomique localisée) avec une réduction de la
+dose de rayons X de l’ordre de 90\% par rapport à un système radiographique conventionnel ou un scanner. Une
+des originalitées du système EOS est que le patient peut prendre place dans diverses positions correspondant
+aux situations de la vie courante, ce qui permet d’obtenir des images de son corps  << en charge >> et donc une
+visualisation plus précise d'éventuelles pathologies (scoliose, trouble de la statique...).
+
+
+
+\begin{marginfigure}
+
+\includegraphics[width=\linewidth]{fig_02}
+\caption{Trois chaînes de transmission de puissance en parallèle \label{cy_13_ch_01_td_03_fig_1}}
+\end{marginfigure}
+
+Le mécanisme interne, constitué d’un bras mobile, guidé par rapport au bâti par trois colonnes verticales. La motorisation est assurée par trois chaînes de transmission constituées :
+\begin{itemize}
+\item d’un moteur électrique à courant continu commandé par l’induit ;
+\item d’un réducteur à engrenages ;
+\item d’une vis à billes, afin de transformer le mouvement de rotation en mouvement de translation.
+\end{itemize}
+La Figure \ref{cy_13_ch_01_td_03_fig_1} détaille la composition des trois chaînes.
+%, tandis que les noms et symboles des caract´eristiques des diff´erents composants seront donn´es plus loin dans le sujet dans le tableau de la Figure 13.
+
+\subsection*{Structure de l'asservissement}
+La grandeur asservie est la vitesse de translation du mobile.
+
+La grandeur de consigne est donc une vitesse notée $v_c(t)$. Celle-ci est adaptée afin de fournir une tension de commande proportionnelle (de gain $A_c$)notée $u_c(t)$. Cette tension est comparée avec une tension $m(t)$ image de la vitess de rotation de la vis $\omega_v(t)$ mesurée par uné génératrice tachymétrique de gain $G_t$. L'écart entre $u_c(t)$ et $m(t)$ est noté $\varepsilon(t)$. Cet écart est corrigé par un correcteur qui fournit une tension d'alimentation $u_m(t)$ à la motorisation électrique. 
+En sortie du moteur, la vitesse de rotation est transmise par un réducteur à engrenages de fonction de transfert $R_e(p)$ et actionne ainsi la vis de vitesse $\omega_v(t)$. La fonction de transfert de la vis à billes est de fonction de transfert $H_v(p)$. L'écrou actionne le bras mobile de vitesse $v(t)$.
+
+
+\question{Cet asservissement satisfait-il les hypothèses des SLCI (Systèmes Linéaires Continus Invariants) ?}
+
+\question{Proposer un schéma-bloc fonctionnel permettant de modéliser l'asservissement en vitesse du bras mobile.}
+
+
+\subsection*{Modélisation du système par équations différentielles}
+
+Les équations concernant le moteur sont :
+$$ u_m(t) = R i(t) + e(t) 
+\quad C_m(t)=K i(t) 
+\quad e(t)=K \omega_m(t) 
+\quad 
+J \dfrac{\text{d} \omega_m(t) }{\text{d} t } = C_m(t)
+$$
+
+\question{Après avoir transformer les équations dans le domaine de Laplace, donner la fonction de transfert du moteur $H_m(p) = \dfrac{\Omega_m(p)}{U_m(p)}$.}
+
+\question{Mettre $H_m(p)$ sous forme canonique. Préciser l'ordre et le classe de la fonction de transfert. Préciser également les pôles.}
+
+Les équations concernant le reste du système sont : 
+$
+\varepsilon(t)=u_c(t)-m(t)
+\quad u_c(t)=A_c v_c(t)
+\quad \dfrac{\text{d}  u_m(t)}{\text{d} t}=\indice{K}{cor}\varepsilon(t) 
+\quad \omega_v(t)= k \omega_m(t)
+\quad v(t)= p_v \omega_v(t)
+\quad m(t)= G_t \omega_v(t)
+$
+
+
+On note $F(p) = \dfrac{V(p)}{V_c(p)}$
+\question{Déterminer $F(p)$ sous forme canonique. Préciser l'ordre et le classe de la fonction de transfert.}
+
+\subsection*{Evaluation analytique des performances}
+
+\begin{marginfigure}
+
+\includegraphics[width=\linewidth]{fig_03}
+\caption{Diagramme d'exigences partiel\label{cy_13_ch_01_td_03_fig_3}}
+\end{marginfigure}
+\question{Donner la transformée de Laplace d'un échelon d'amlitude 1 et d'une rampe de pente 1.}
+
+\question{Déterminer la valeur finale de $v(t)$ pour une entrée échelon. Conclure vis-à-vis du cahier des charges.}
+
+\question{Déterminer la valeur finale de $v(t)$ pour une entrée en rampe.}
+
+\subsection*{Evaluation graphique des performances}
+
+Une simulation a permis d’obtenir l'evolution temporelle de la vitesse du bras en réponse à une consigne en
+vitesse de $\SI{10}{cm.s^{-1}}$ et d’un couple résistant constant.
+
+\begin{center}
+\centering
+\includegraphics[width=.6\linewidth]{fig_04}
+\end{center}
+
+\question{Détermnier le temps de réponse et l'écart statique. Le système satisfait-il les exigences du cahier des charges ?}
+%
+%
+%\newpage
+%
+%\begin{center}%[h]
+%%\centering
+%\begin{tabular}{p{2.5cm}p{6cm}l}
+%\hline
+%\textbf{Exigence} & \textbf{Critères} & \textbf{Niveau} \\
+%\hline 
+%\multirow{4}{2.5cm}{Contrôler le mouvement de l'habitacle} 
+%& Ecart statique pour une entrée indicielle & $0\degres$ \\
+%& Ecart de trainage pour une entrée en rampe unitaire & $0\degres$ \\
+%& Ecart dynamique & $<1\degres$ \\
+%& Temps de réponse à 5\% & $\leq \SI{0,1}{s}$ \\
+%%& Marge de phase & Comprise entre $45\degres$ et $50\degres$ \\
+%& Dépassement & Inférieur à 10\% \\
+%\hline
+%\end{tabular}
+%\captionof{table}{Exigences de l'asservissement \label{cy_13_ch_01_td_02_tab_1}}
+%\end{center}
+%
+%
+%
+%\subsection*{Modélisation de la structure du système}
+%
+%\begin{marginfigure}
+%\centering
+%\includegraphics[width=.9\linewidth]{fig_03}
+%\end{marginfigure}
+%
+%
+%Le mouvement de l'habitacle est asservi en position angulaire. La consigne $\alpha_c(t)$ est générée par un calculateur est adaptée par un adaptateur électronique, dont le signal de sorti est noté $u_c(t)$. Ce signal est comparé au signal $m(t)$ provenant d'un capteur de position. En sortie du comparateur, l'écart $\varepsilon(t)$ est ajustée grâce à un correcteur. 
+%
+%Le correcteur, grâce à une tension de commande $u(t)$, pilote un servo-distributeur hdyraulique dont l'objectif est de moduler le débit d'huile $q(t)$ qui permet de déplacer le vérin. Ce déplacement est noté $\lambda(t)$. Ce vérin permet de modifier les longueurs du triangle $OA_1B_1$ et donc de modifier l'angle $\alpha(t)$ de  l'habitacle.
+%
+%\question{Proposer un schéma-bloc fonctionnel pour modéliser l'asservissement en position angulaire de l'habitacle.}
+%
+%\question{Cet asservissement satisfait-il les hypothèses des SLCI (Systèmes Linéaires Continus Invariants) ?}
+%
+%
+%
+%\subsection*{Modèle de connaissance}
+%Les équations suivantes modélisent le comportement des composants :
+%\begin{itemize}
+%\item comparateur : $\varepsilon(t)=u_c(t)-m(t)$;
+%\item correcteur : $u(t)=\varepsilon(t)$;
+%\item servo-distributeur : $q(t)=K_S u(t)$;
+%\item capteur : $m(t)=C\alpha(t)$, adapteur électronique : $u_c(t)=C\alpha_c(t)$;
+%\item en faisant l'hypothèse que le fluide est incompressible : $q(t)=S\lambdap(t)$;
+%\item en faisant l'hypothèse que les variation de $\alpha(t)$ sont limitées, on a $\alpha(t)=R\lambda(t)$.
+%%($\lambdap(t)=\dfrac{\d\lambda(t)}{\d t}$).
+%\end{itemize}
+%
+%\question{En faisant l'hypothèse que les conditions de Heaviside sont respectées; transformer les équations dans le domaine de Laplace.}
+%
+%\question{Calculer la fonction de transfert $F(p) = \dfrac{M(p)}{\varepsilon(p)}$. Mettre cette fonction sous forme canonique. Préciser son ordre, son gain statique, sa classe et ses pôles.}
+%
+%
+%\question{Calculer la fonction de transfert $H(p) = \dfrac{\alpha(p)}{\alpha_c(p)}$. Mettre cette fonction sous forme canonique. Préciser son ordre, son gain statique, sa classe et ses pôles.}
+%
+%\subsection*{Evaluation analytique des performances}
+%
+%\question{Donner la transformée de Laplace d'un échelon d'amlitude 1 et d'une rampe de pente 1.}
+%
+%
+%\question{Déterminer la valeur finale de $\alpha_c(t)$ pour une entrée échelon. Conclure vis-à-vis du cahier des charges.}
+%
+%\question{Déterminer la valeur finale de $\alpha_c(t)$ pour une entrée en rampe. Conclure vis-à-vis du cahier des charges.}
+%
+%\subsection*{Evaluation graphique des performances}
+%
+%Le correcteur a été modifié pour améliorer les performances du système.
+%On sollicite le système avec l'entrée ci-contre.
+%On mesure la réponse suivante.
+%\begin{marginfigure}
+%\includegraphics[width=\linewidth]{fig_04}
+%\end{marginfigure}
+%
+%\begin{center}
+%\centering
+%\includegraphics[width=.4\linewidth]{fig_05}
+%\end{center}
+%
+%\question{Le système satisfait-il les exigences du cahier des charges ?}
+
