@@ -31,6 +31,8 @@
 \includegraphics[width=.9\linewidth]{fig_02}
 \end{marginfigure}
 
+\ifprof
+\else
 Le Clever est un démonstrateur technologique développé par un tissu d'industriels européens -- dont BMW, l'Institut Français du Pétrole (IFP) et de nombreux équipementiers --. Clever est la contraction de Compact Low Emission VEhiclefor uRban tRansportation (véhicule compact à faibles émissions pour le transport urbain). 
 
 
@@ -55,6 +57,7 @@ Le cahier des charges de l'asservissement angulaire de l'inclinaison de l'habita
 \end{tabular}
 \captionof{table}{Exigences de l'asservissement \label{cy_13_ch_01_td_02_tab_1}}
 \end{center}
+\fi
 
 
 
@@ -65,9 +68,11 @@ Le cahier des charges de l'asservissement angulaire de l'inclinaison de l'habita
 \includegraphics[width=.9\linewidth]{fig_03}
 \end{marginfigure}
 
-
+\ifprof
+\else
 Le mouvement de l'habitacle est asservi en position angulaire. La consigne $\alpha_c(t)$ est générée par un calculateur puis adaptée par un \textbf{adaptateur} électronique, dont le signal de sorti est noté $u_c(t)$. Ce signal est \textbf{comparé} au signal $m(t)$ provenant d'un \textbf{capteur de position}. En sortie du comparateur, l'écart $\varepsilon(t)$ est ajusté grâce à un \textbf{correcteur}. 
 Le correcteur, grâce à une tension de commande $u(t)$, pilote un \textbf{servo-distributeur hydraulique} dont l'objectif est de moduler le débit d'huile $q(t)$ qui permet de déplacer le \textbf{vérin}. Ce déplacement est noté $\lambda(t)$. Ce vérin permet de modifier les longueurs du \textbf{triangle} $OA_1B_1$ et donc de modifier l'angle $\alpha(t)$ de  l'habitacle.
+\fi
 
 \question{Proposer un schéma-bloc fonctionnel pour modéliser l'asservissement en position angulaire de l'habitacle.}
 \ifprof
@@ -181,6 +186,8 @@ Le correcteur, grâce à une tension de commande $u(t)$, pilote un \textbf{servo
 
 
 \subsection*{Modèle de connaissance}
+\ifprof
+\else
 Les équations suivantes modélisent le comportement des composants :
 \begin{itemize}
 \item comparateur : $\varepsilon(t)=u_c(t)-m(t)$, correcteur : $u(t)=K\varepsilon(t)$;
@@ -198,6 +205,7 @@ $Q(p) = \mathcal{L}\left(q(t)\right)$,
 $U(p) = \mathcal{L}\left(u(t)\right)$, 
 $\alpha(p) = \mathcal{L}\left(\alpha(t)\right)$,
 $\lambda(p) = \mathcal{L}\left(\lambda(t)\right)$...}
+\fi
 
 
 \question{En faisant l'hypothèse que les conditions de Heaviside sont respectées, transformer les équations dans le domaine de Laplace.}
@@ -205,7 +213,7 @@ $\lambda(p) = \mathcal{L}\left(\lambda(t)\right)$...}
 \begin{corrige}
 \begin{itemize}
 \item comparateur : $\varepsilon(p)=U_c(p)-M(p)$;
-\item  correcteur : $U(p)=K\varepsilon(p)$;
+\item correcteur : $U(p)=K\varepsilon(p)$;
 \item servo-distributeur : $Q(p)=K_S U(p)$;
 \item capteur : $M(p)=C\alpha(p)$;
 \item adapteur électronique : $U_c(t)=C\alpha_c(p)$;
@@ -217,32 +225,110 @@ $\lambda(p) = \mathcal{L}\left(\lambda(t)\right)$...}
 \fi
 
 \question{Calculer la fonction de transfert $F(p) = \dfrac{M(p)}{\varepsilon(p)}$. Mettre cette fonction sous forme canonique. Préciser son ordre, son gain statique, sa classe et ses pôles.}
+\ifprof
+\begin{corrige}
+En utilisant les équations précédentes, on a : 
+$M(p)=C\alpha(p)$ $=CR\lambda(p)$ $= \dfrac{CR}{Sp} Q(p)$ $= \dfrac{CR}{Sp} K_S U(p)$
+$= \dfrac{CR}{Sp} K_S K\varepsilon(p)$. 
+On  a donc $F(p) = \dfrac{M(p)}{\varepsilon(p)} = \dfrac{CR}{Sp} K_S K$.
+
+Il s'agit d'une fonction de transfert d'ordre 1 et de classe 1, de gain $\dfrac{CRK_S K}{S} $. Cette fonction a un pôle nul.
+\end{corrige}
+\else
+\fi
 
 
 \question{Calculer la fonction de transfert $H(p) = \dfrac{\alpha(p)}{\alpha_c(p)}$. Mettre cette fonction sous forme canonique. Préciser son ordre, son gain statique, sa classe et ses pôles.}
+\ifprof
+\begin{corrige}
+On a $\varepsilon(p)=U_c(p)-M(p)$
+$\Rightarrow \dfrac{M(p)}{F(p)}=U_c(p)-M(p)$
+$\Rightarrow M(p) \left(\dfrac{1}{F(p)} + 1\right)=U_c(p)$
+$\Rightarrow C\alpha(p) \left(\dfrac{1}{F(p)} + 1\right)=C \alpha_c(p)$
+$\Rightarrow H(p) = \dfrac{\alpha(p)}{\alpha_c(p)} =  \dfrac{1}{\dfrac{1}{F(p)} + 1}$
+$\Rightarrow H(p) =  \dfrac{F(p)}{1+F(p)}$
+$\Rightarrow H(p) =  \dfrac{\dfrac{CR}{Sp} K_S K}{1+\dfrac{CR}{Sp} K_S K}$
+$\Rightarrow H(p) =  \dfrac{CRK_S K}{Sp+CR K_S K}$
+$\Rightarrow H(p) =   \dfrac{1}{\dfrac{S}{CRK_S K}p+1}$
+
+
+C'est une fonction de transfert d'ordre 1, de classe 0, de gain statique 1 ayant un seul pôle : $-\dfrac{CRK_S K}{S}$.
+\end{corrige}
+\else
+\fi
 
 \subsection*{Evaluation analytique des performances}
 
-\question{Donner la transformée de Laplace d'un échelon d'amlitude 1 et d'une rampe de pente 1.}
+\question{Donner la transformée de Laplace d'un échelon d'amplitude 1 et d'une rampe de pente 1.}
+\ifprof
+\begin{corrige}
+$\alpha_c(p) = \dfrac{1}{p}$ pour un échelon et $\alpha_c(p) = \dfrac{1}{p^2}$ pour une rampe.
+\end{corrige}
+\else
+\fi
 
 
 \question{Déterminer la valeur finale de $\alpha_c(t)$ pour une entrée échelon. Conclure vis-à-vis du cahier des charges.}
+\ifprof
+\begin{corrige}
+On a $\alpha(p)=\alpha_c(p) H(p)$. 
+Par ailleurs, 
+$\lim\limits_{t\to  +\infty}  \alpha(t) = \lim\limits_{t\to  0}  p  \alpha(p) $ 
+$= \lim\limits_{t\to  0}  p  \dfrac{1}{p} \dfrac{1}{\dfrac{S}{CRK_S K}p+1} = 1$
 
-\question{Déterminer la valeur finale de $\alpha_c(t)$ pour une entrée en rampe. Conclure vis-à-vis du cahier des charges.}
+Quand $t$ tend vers l'infini, la valeur finale est égale à la valeur d'entrée. Le système a un écart statique nul.
+
+\end{corrige}
+\else
+\fi
+
+\question{Déterminer la valeur finale de $\alpha_c(t)$ pour une entrée en rampe. Peut-on conclure sur l'exigence concernant l'écart dynamique ?}
+\ifprof
+\begin{corrige}
+$\lim\limits_{t\to  +\infty}  \alpha(t) =  $ 
+$= \lim\limits_{t\to  0}  p  \dfrac{1}{p^2} \dfrac{1}{\dfrac{S}{CRK_S K}p+1} $
+$= \lim\limits_{t\to  0}   \dfrac{1}{p} \dfrac{1}{\dfrac{S}{CRK_S K}p+1}  = +\infty$
+
+On ne peut pas conclure. Il faudrait calculer 
+$\lim\limits_{t\to  +\infty}  \alpha_c(t) - \alpha(t)$.
+\end{corrige}
+\else
+\fi
 
 \subsection*{Evaluation graphique des performances}
-
+\ifprof
+\else
 Le correcteur a été modifié pour améliorer les performances du système.
 On sollicite le système avec l'entrée ci-contre.
 On mesure la réponse suivante.
+\fi
+
 \begin{marginfigure}
 \includegraphics[width=\linewidth]{fig_04}
 \end{marginfigure}
 
+\ifprof
+\begin{marginfigure}
+\centering
+\includegraphics[width=\linewidth]{fig_05}
+\end{marginfigure}
+\else
 \begin{center}
 \centering
 \includegraphics[width=.5\linewidth]{fig_05}
 \end{center}
+\fi
 
 \question{Le système satisfait-il les exigences du cahier des charges ?}
+\ifprof
+\begin{corrige}
+\begin{itemize}
+\item Sur la partie entrée en rampe, entre 0,4 et 0,7 seconde, l'écart de trainage semble tendre vers 0\degres. (CDC OK)
+\item Sur la partie finale, $t>\SI{1,4}{s}$, l'écart statique smeble tendre vers 0\degres. (CDC OK)
+\item Le temps de réponse ne peut pas être vérifié sur cet essai. 
+\item Le dépassement est de $3/45$ soit 7\%  ce qui est compatible avec le CDC.  
+\end{itemize}
+\end{corrige}
+\else
+\fi
 

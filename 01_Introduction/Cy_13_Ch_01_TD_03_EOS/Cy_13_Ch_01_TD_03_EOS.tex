@@ -29,21 +29,24 @@
 \centering
 \includegraphics[width=.9\linewidth]{fig_01}
 \end{marginfigure}
-
+\ifprof
+\else
 EOS est un système d’imagerie qui permet l’acquisition simultanée de radiographies de face et de profil du corps entier (ou d’une zone anatomique localisée) avec une réduction de la
 dose de rayons X de l’ordre de 90\% par rapport à un système radiographique conventionnel ou un scanner. Une
 des originalitées du système EOS est que le patient peut prendre place dans diverses positions correspondant
 aux situations de la vie courante, ce qui permet d’obtenir des images de son corps  << en charge >> et donc une
 visualisation plus précise d'éventuelles pathologies (scoliose, trouble de la statique...).
-
+\fi
 
 
 \begin{marginfigure}
-
 \includegraphics[width=\linewidth]{fig_02}
 \caption{Trois chaînes de transmission de puissance en parallèle \label{cy_13_ch_01_td_03_fig_1}}
 \end{marginfigure}
 
+
+\ifprof
+\else
 Le mécanisme interne, constitué d’un bras mobile, guidé par rapport au bâti par trois colonnes verticales. La motorisation est assurée par trois chaînes de transmission constituées :
 \begin{itemize}
 \item d’un moteur électrique à courant continu commandé par l’induit ;
@@ -52,21 +55,88 @@ Le mécanisme interne, constitué d’un bras mobile, guidé par rapport au bât
 \end{itemize}
 La Figure \ref{cy_13_ch_01_td_03_fig_1} détaille la composition des trois chaînes.
 %, tandis que les noms et symboles des caract´eristiques des diff´erents composants seront donn´es plus loin dans le sujet dans le tableau de la Figure 13.
+\fi
 
 \subsection*{Structure de l'asservissement}
+
+\ifprof
+\else
 La grandeur asservie est la vitesse de translation du mobile.
 
 La grandeur de consigne est donc une vitesse notée $v_c(t)$. Celle-ci est \textbf{adaptée} afin de fournir une tension de commande proportionnelle (de gain $A_c$) notée $u_c(t)$. Cette tension est \textbf{comparée} avec une tension $m(t)$ image de la vitess de rotation de la vis $\omega_v(t)$ mesurée par uné \textbf{génératrice tachymétrique} de gain $G_t$. L'écart entre $u_c(t)$ et $m(t)$ est noté $\varepsilon(t)$. Cet écart est corrigé par \textbf{un correcteur} qui fournit une tension d'alimentation $u_m(t)$ à \textbf{la motorisation électrique}. 
 En sortie du moteur, la vitesse de rotation est transmise par un \textbf{réducteur à engrenages} de fonction de transfert $R_e(p)$ et actionne ainsi la vis de vitesse $\omega_v(t)$. La fonction de transfert de \textbf{la vis à billes} est notée $H_v(p)$. L'écrou actionne le bras mobile de vitesse $v(t)$.
-
+\fi
 
 \question{Cet asservissement satisfait-il les hypothèses des SLCI (Systèmes Linéaires Continus Invariants) ?}
+\ifprof
+\begin{corrige}
+\begin{itemize}
+\item Le système est asservi car il est équipé d'un capteur et d'un sommateur qui permettent de corriger l'écart entre la consigne de l'utilisateur et le signal mesuré sur le système.
+\item Linéarité du système : rien ne nous informe ici qu'un des composants a un comportement non linéaire (éventuelement le CAN ou le CNA).
+\item Continuité du système : peu d'information ici, mais l'asservissement sera très certainement fait par un micocontroleur fonctionnant avec des grandeurs numériques; le CAN et le CNA peuvent remettre en question la continuité du système.
+\item Invariance du système : on fait l'hypothèse que les constantes ne varient pas au cours du temps.
+\end{itemize}
+\end{corrige}
+\else
+\fi
 
 \question{Proposer un schéma-bloc fonctionnel permettant de modéliser l'asservissement en vitesse du bras mobile.}
 
+\ifprof
+\begin{corrige}
+\footnotesize
+%\begin{figure}[!h]
+\begin{center}
+\begin{tikzpicture}
+\sbEntree{E}
+
+\sbBloc[5]{b0}{Adapt.}{E}
+    \sbRelier[$v_c(t)$]{E}{b0}
+
+\sbComp{c1}{b0}
+    \sbRelier[$u_c(t)$]{b0}{c1}
+
+\sbBloc[3]{b1}{Corr.}{c1}
+    \sbRelier[$\varepsilon(t)$]{c1}{b1}
+    
+\sbBloc[3]{b2}{Moteur}{b1}
+    \sbRelier[$u_m(t)$]{b1}{b2}
+
+\sbBloc[3]{b3}{Réducteur}{b2}
+    \sbRelier[$\omega_m(t)$]{b2}{b3}
+
+
+\sbBloc[3]{b4}{Vis-écrou}{b3}
+    \sbRelier[$\omega_v(t)$]{b3}{b4}
+
+
+\sbSortie[4]{S}{b4}
+    \sbRelier{b4}{S}
+    \sbNomLien[0.8]{S}{$v(t)$}
+  
+%\sbRenvoi{b2-S}{c1}{}
+
+
+%% BLOC DE RETOUR ET RENVOI
+\sbDecaleNoeudy[4]{b3}{n1} 
+\sbDecaleNoeudx[0]{n1}{n2} 
+
+\sbBlocr{r}{Capteur}{n2} 
+\sbRelieryx{b3-b4}{r}
+\sbRelierxy[$m(t)$]{r}{c1}
+%%%%
+
+\end{tikzpicture}
+\end{center}
+\normalsize
+%%%%%%%%%%%%%%%
+\end{corrige}
+\else
+\fi
 
 \subsection*{Modélisation du système par équations différentielles}
-
+\ifprof
+\else
 Les équations concernant le moteur sont :
 $$ u_m(t) = R i(t) + e(t) 
 \quad C_m(t)=K i(t) 
@@ -74,11 +144,41 @@ $$ u_m(t) = R i(t) + e(t)
 \quad 
 J \dfrac{\text{d} \omega_m(t) }{\text{d} t } = C_m(t)
 $$
+\fi
 
-\question{Après avoir transformer les équations dans le domaine de Laplace, donner la fonction de transfert du moteur $H_m(p) = \dfrac{\Omega_m(p)}{U_m(p)}$.}
+\question{Après avoir transformé les équations dans le domaine de Laplace, donner la fonction de transfert du moteur $H_m(p) = \dfrac{\Omega_m(p)}{U_m(p)}$.}
+\ifprof
+\begin{corrige}
+Dans le domaine de Laplace, on a : 
 
-\question{Mettre $H_m(p)$ sous forme canonique. Préciser l'ordre et le classe de la fonction de transfert. Préciser également les pôles.}
+$$ U_m(p) = R I(p) + E(p) 
+\quad C_m(p)=K I(p) 
+\quad E(p)=K \Omega_m(p) 
+\quad 
+J p \Omega_m(p) = C_m(p)
+$$
 
+Par substitutions, on a alors :
+$ U_m(p) = R \dfrac{C_m(p)}{K} + K \Omega_m(p) $ 
+$\Rightarrow U_m(p) = R \dfrac{J p \Omega_m(p)}{K} + K \Omega_m(p) $ 
+$\Rightarrow U_m(p) = \left(R \dfrac{J p }{K} + K \right)\Omega_m(p) $ 
+$\Rightarrow \dfrac{\Omega_m(p)}{U_m(p)} = \dfrac{1}{\left(R \dfrac{J p }{K} + K \right)} $ 
+$\Rightarrow \dfrac{\Omega_m(p)}{U_m(p)} = \dfrac{1/K}{\dfrac{RJ p }{K^2} + 1 } $ 
+\end{corrige}
+\else
+\fi
+
+\question{Mettre $H_m(p)$ sous forme canonique. Préciser le gain, l'ordre et le classe de la fonction de transfert. Préciser également le ou les pôles.}
+\ifprof
+\begin{corrige}
+$H_m(p)= \dfrac{1/K}{\dfrac{RJ p }{K^2} + 1} $  est une fonction d'ordre 1, de classe 0 et de gain $1/K$.
+Elle n'a qu'un seul pôle : $-\dfrac{K^2}{RJ}$.
+\end{corrige}
+\else
+\fi
+
+\ifprof
+\else
 Les équations concernant le reste du système sont : 
 $
 \varepsilon(t)=u_c(t)-m(t)
@@ -90,8 +190,44 @@ $
 $
 
 
-On note $F(p) = \dfrac{V(p)}{V_c(p)}$
+On note $F(p) = \dfrac{V(p)}{V_c(p)}$.
+\fi
+
+
 \question{Déterminer $F(p)$ sous forme canonique. Préciser l'ordre et le classe de la fonction de transfert.}
+\ifprof
+\begin{corrige}
+$\varepsilon(p)=U_c(p)-M(p)
+\quad U_c(p)=A_c V_c(p)
+\quad p U_m(p)=\indice{K}{cor}\varepsilon(p) 
+\quad \Omega_v(p)= k \Omega_m(p)
+\quad V(p)= p_v \Omega_v(p)
+\quad M(p)= G_t \Omega_v(p)
+$
+
+Par substitutions, on a :
+$\varepsilon(p)=U_c(p)-M(p)$
+$\Rightarrow  \dfrac{pU_m(p)}{\indice{K}{cor}}=A_c V_c(p)-G_t \Omega_v(p)$
+$\Rightarrow  \dfrac{p}{\indice{K}{cor}}\Omega_m(p)\dfrac{1}{H_m(p)}=A_c V_c(p)-G_t \dfrac{V(p)}{p_v}$
+$\Rightarrow  \dfrac{p}{\indice{K}{cor}} \dfrac{V(p)}{p_v}\dfrac{1}{k H_m(p)}=A_c V_c(p)-G_t \dfrac{V(p)}{p_v}$
+
+On a alors
+$\Rightarrow  V(p) \left(\dfrac{p}{p_vk H_m(p)\indice{K}{cor}} +\dfrac{G_t}{p_v}\right)=A_c V_c(p)$
+$\Rightarrow  \dfrac{V(p)}{ V_c(p)} = \dfrac{A_c}{\dfrac{p}{p_vk H_m(p)\indice{K}{cor}} +\dfrac{G_t}{p_v}}$
+$\Rightarrow  \dfrac{V(p)}{ V_c(p)} = \dfrac{A_c}{p\dfrac{\dfrac{RJ p }{K^2} + 1 }{p_vk (1/K)\indice{K}{cor}} +\dfrac{G_t}{p_v}}$
+$\Rightarrow  \dfrac{V(p)}{ V_c(p)} = \dfrac{A_c p_vk \indice{K}{cor}}{p\left(\dfrac{RJ p }{K} + K \right) +G_t k \indice{K}{cor}}$
+
+
+$\Rightarrow  \dfrac{V(p)}{ V_c(p)} = \dfrac{\dfrac{A_c p_vk \indice{K}{cor}}{G_t k \indice{K}{cor}}}{\dfrac{p}{G_t k \indice{K}{cor}}\left(\dfrac{RJ p }{K} + K \right) +1}
+= \dfrac{\dfrac{A_c p_v}{G_t}}{\dfrac{p}{G_t k \indice{K}{cor}}\left(\dfrac{RJ p }{K} + K \right) +1}$
+
+
+Fonction de transfert de classe 0 et d'ordre 2. 
+
+
+\end{corrige}
+\else
+\fi
 
 \subsection*{Evaluation analytique des performances}
 
@@ -100,23 +236,72 @@ On note $F(p) = \dfrac{V(p)}{V_c(p)}$
 \includegraphics[width=\linewidth]{fig_03}
 \caption{Diagramme d'exigences partiel\label{cy_13_ch_01_td_03_fig_3}}
 \end{marginfigure}
-\question{Donner la transformée de Laplace d'un échelon d'amlitude 1 et d'une rampe de pente 1.}
+\question{Donner la transformée de Laplace d'un échelon d'amplitude 1 et d'une rampe de pente 1.}
+\ifprof
+\begin{corrige}
+$V_c(p) = \dfrac{1}{p}$ pour un échelon et $V_c(p) = \dfrac{1}{p^2}$ pour une rampe.
+\end{corrige}
+\else
+\fi
 
 \question{Déterminer la valeur finale de $v(t)$ pour une entrée échelon. Conclure vis-à-vis du cahier des charges.}
+\ifprof
+\begin{corrige}
+On a $V(p)=V_c(p) F(p)$. 
+Par ailleurs, 
+$\lim\limits_{t\to  +\infty}  v(t) = \lim\limits_{t\to  0}  p  V(p) $ 
+$= \lim\limits_{t\to  0}  p  \dfrac{1}{p} F(p) = \dfrac{A_c p_v}{G_t}$
+
+NB : il aurait fallu montrer que $A_c =\dfrac{G_t}{p_v} $...
+
+Quand $t$ tend vers l'infini, la valeur finale est égale à la valeur d'entrée. Le système a un écart statique nul.
+
+\end{corrige}
+\else
+\fi
 
 \question{Déterminer la valeur finale de $v(t)$ pour une entrée en rampe.}
+\ifprof
+\begin{corrige}
+De manière analogue, on montre que 
+$\lim\limits_{t\to  +\infty}  v(t) = \lim\limits_{t\to  0}  p  V(p) $ 
+$= \lim\limits_{t\to  0}  p  \dfrac{1}{p^2} F(p) = +\infty$
+
+\end{corrige}
+\else
+\fi
 
 \subsection*{Evaluation graphique des performances}
 
+\ifprof
+\else
 Une simulation a permis d’obtenir l'evolution temporelle de la vitesse du bras en réponse à une consigne en
 vitesse de $\SI{10}{cm.s^{-1}}$ et d’un couple résistant constant.
+\fi
 
+\ifprof
+\begin{marginfigure}
+\includegraphics[width=\linewidth]{fig_04}
+\end{marginfigure}
+\else
 \begin{center}
 \centering
 \includegraphics[width=.6\linewidth]{fig_04}
 \end{center}
+\fi
 
 \question{Détermnier le temps de réponse et l'écart statique. Le système satisfait-il les exigences du cahier des charges ?}
+\ifprof
+\begin{corrige}
+L'écart statique est nul. 
+L'exigence 8.3.1.1.1 est validée. 
+
+Le temps de réponse à 5\% est inférieur à \SI{1}{s}.
+
+\end{corrige}
+\else
+\fi
+
 %
 %
 %\newpage
