@@ -66,20 +66,124 @@ Le cahier des charges de l'asservissement angulaire de l'inclinaison de l'habita
 \end{marginfigure}
 
 
-Le mouvement de l'habitacle est asservi en position angulaire. La consigne $\alpha_c(t)$ est générée par un calculateur est adaptée par un adaptateur électronique, dont le signal de sorti est noté $u_c(t)$. Ce signal est comparé au signal $m(t)$ provenant d'un capteur de position. En sortie du comparateur, l'écart $\varepsilon(t)$ est ajustée grâce à un correcteur. 
-
-Le correcteur, grâce à une tension de commande $u(t)$, pilote un servo-distributeur hdyraulique dont l'objectif est de moduler le débit d'huile $q(t)$ qui permet de déplacer le vérin. Ce déplacement est noté $\lambda(t)$. Ce vérin permet de modifier les longueurs du triangle $OA_1B_1$ et donc de modifier l'angle $\alpha(t)$ de  l'habitacle.
+Le mouvement de l'habitacle est asservi en position angulaire. La consigne $\alpha_c(t)$ est générée par un calculateur puis adaptée par un \textbf{adaptateur} électronique, dont le signal de sorti est noté $u_c(t)$. Ce signal est \textbf{comparé} au signal $m(t)$ provenant d'un \textbf{capteur de position}. En sortie du comparateur, l'écart $\varepsilon(t)$ est ajusté grâce à un \textbf{correcteur}. 
+Le correcteur, grâce à une tension de commande $u(t)$, pilote un \textbf{servo-distributeur hydraulique} dont l'objectif est de moduler le débit d'huile $q(t)$ qui permet de déplacer le \textbf{vérin}. Ce déplacement est noté $\lambda(t)$. Ce vérin permet de modifier les longueurs du \textbf{triangle} $OA_1B_1$ et donc de modifier l'angle $\alpha(t)$ de  l'habitacle.
 
 \question{Proposer un schéma-bloc fonctionnel pour modéliser l'asservissement en position angulaire de l'habitacle.}
+\ifprof
+\begin{corrige}
+\footnotesize
+%\begin{figure}[!h]
+\begin{center}
+\begin{tikzpicture}
+\sbEntree{E}
+
+\sbBloc[5]{b0}{Adapt.}{E}
+    \sbRelier[$\alpha_{\text{c}}(t)$]{E}{b0}
+
+\sbComp{c1}{b0}
+    \sbRelier{b0}{c1}
+
+\sbBloc[3]{b1}{Corr.}{c1}
+    \sbRelier[$\varepsilon(t)$]{c1}{b1}
+    
+\sbBloc[3]{b2}{Servo dist. }{b1}
+    \sbRelier[$u(t)$]{b1}{b2}
+
+\sbBloc[3]{b3}{Vérin}{b2}
+    \sbRelier[$q(t)$]{b2}{b3}
+
+
+\sbBloc[3]{b4}{Triangle}{b3}
+    \sbRelier[$\lambda(t)$]{b3}{b4}
+
+
+\sbSortie[4]{S}{b4}
+    \sbRelier{b4}{S}
+    \sbNomLien[0.8]{S}{$\alpha(t)$}
+  
+%\sbRenvoi{b2-S}{c1}{}
+
+
+%% BLOC DE RETOUR ET RENVOI
+\sbDecaleNoeudy[4]{b4}{n1} 
+\sbDecaleNoeudx[0]{n1}{n2} 
+
+\sbBlocr{r}{Capteur}{n2} 
+\sbRelieryx{b4-S}{r}
+\sbRelierxy[$m(t)$]{r}{c1}
+%%%%
+
+\end{tikzpicture}
+\end{center}
+\normalsize
+%%%%%%%%%%%%%%%
+\end{corrige}
+\else
+%%%%%%%%%%%%%%%%%%%%%
+\footnotesize
+\begin{figure}[!h]
+\begin{center}
+\begin{tikzpicture}
+\sbEntree{E}
+
+\sbBloc[5]{b0}{ }{E}
+    \sbRelier[$\omega_{\text{cons}}(t)$]{E}{b0}
+
+\sbComp{c1}{b0}
+    \sbRelier{b0}{c1}
+
+\sbBloc[3]{b1}{}{c1}
+    \sbRelier{c1}{b1}
+    
+\sbBloc[3]{b2}{ }{b1}
+    \sbRelier[$ $]{b1}{b2}
+    
+
+\sbSortie[4]{S}{b2}
+    \sbRelier{b2}{S}
+    \sbNomLien[0.8]{S}{$\omega_m(t)$}
+  
+%\sbRenvoi{b2-S}{c1}{}
+
+
+%% BLOC DE RETOUR ET RENVOI
+\sbDecaleNoeudy[4]{b2}{n1} 
+\sbDecaleNoeudx[0]{n1}{n2} 
+
+\sbBlocr{r}{}{n2} 
+\sbRelieryx{b2-S}{r}
+\sbRelierxy{r}{c1}
+%%%%
+
+\end{tikzpicture}
+\end{center}
+
+\end{figure}
+\normalsize
+%%%%%%%%%%%%%%%
+\fi
+
+
 
 \question{Cet asservissement satisfait-il les hypothèses des SLCI (Systèmes Linéaires Continus Invariants) ?}
-
+\ifprof
+\begin{corrige}
+\begin{itemize}
+\item Le système est asservi car il est équipé d'un capteur et d'un sommateur qui permettent de corriger l'écart entre la consigne de l'utilisateur et le signal mesuré sur le système.
+\item Linéarité du système : la transformation géométrique du triangle n'est pas linéaire.
+\item Continuité du système : peu d'information ici, mais l'asservissement sera très certainement fait par un micocontroleur fonctionnant avec des grandeurs numériques, les CAN et les CNA peuvent remettre en question la continuité du système.
+\item Invariance du système : on fait l'hypothèse que les constantes ne varient pas au cours du temps.
+\end{itemize}
+\end{corrige}
+\else
+\fi
 
 
 \subsection*{Modèle de connaissance}
 Les équations suivantes modélisent le comportement des composants :
 \begin{itemize}
-\item comparateur : $\varepsilon(t)=u_c(t)-m(t)$, correcteur : $u(t)=\varepsilon(t)$;
+\item comparateur : $\varepsilon(t)=u_c(t)-m(t)$, correcteur : $u(t)=K\varepsilon(t)$;
 \item servo-distributeur : $q(t)=K_S u(t)$;
 \item capteur : $m(t)=C\alpha(t)$, adapteur électronique : $u_c(t)=C\alpha_c(t)$;
 \item en faisant l'hypothèse que le fluide est incompressible : $q(t)=S\lambdap(t)$;
@@ -87,7 +191,30 @@ Les équations suivantes modélisent le comportement des composants :
 %($\lambdap(t)=\dfrac{\d\lambda(t)}{\d t}$).
 \end{itemize}
 
-\question{En faisant l'hypothèse que les conditions de Heaviside sont respectées; transformer les équations dans le domaine de Laplace.}
+\marginnote{On notera $U_c(p) = \mathcal{L}\left(u_c(t)\right)$, 
+$M(p) = \mathcal{L}\left(m(t)\right)$, 
+$\varepsilon(p) = \mathcal{L}\left(\varepsilon(t)\right)$, 
+$Q(p) = \mathcal{L}\left(q(t)\right)$, 
+$U(p) = \mathcal{L}\left(u(t)\right)$, 
+$\alpha(p) = \mathcal{L}\left(\alpha(t)\right)$,
+$\lambda(p) = \mathcal{L}\left(\lambda(t)\right)$...}
+
+
+\question{En faisant l'hypothèse que les conditions de Heaviside sont respectées, transformer les équations dans le domaine de Laplace.}
+\ifprof
+\begin{corrige}
+\begin{itemize}
+\item comparateur : $\varepsilon(p)=U_c(p)-M(p)$;
+\item  correcteur : $U(p)=K\varepsilon(p)$;
+\item servo-distributeur : $Q(p)=K_S U(p)$;
+\item capteur : $M(p)=C\alpha(p)$;
+\item adapteur électronique : $U_c(t)=C\alpha_c(p)$;
+\item en faisant l'hypothèse que le fluide est incompressible : $Q(p)=Sp \lambda(p)$;
+\item  $\alpha(p)=R\lambda(p)$.
+\end{itemize}
+\end{corrige}
+\else
+\fi
 
 \question{Calculer la fonction de transfert $F(p) = \dfrac{M(p)}{\varepsilon(p)}$. Mettre cette fonction sous forme canonique. Préciser son ordre, son gain statique, sa classe et ses pôles.}
 
