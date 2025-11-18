@@ -70,7 +70,7 @@ Le cahier des charges de l'asservissement angulaire de l'inclinaison de l'habita
 
 \ifprof
 \else
-Le mouvement de l'habitacle est asservi en position angulaire. La consigne $\alpha_c(t)$ est générée par un calculateur puis adaptée par un \textbf{adaptateur} électronique, dont le signal de sorti est noté $u_c(t)$. Ce signal est \textbf{comparé} au signal $m(t)$ provenant d'un \textbf{capteur de position}. En sortie du comparateur, l'écart $\varepsilon(t)$ est ajusté grâce à un \textbf{correcteur}. 
+Le mouvement de l'habitacle est asservi en position angulaire. La consigne $\alpha_c(t)$ est générée par un calculateur puis adaptée par un \textbf{adaptateur} électronique, dont le signal de sorti est noté $u_c(t)$. Ce signal est \textbf{comparé} au signal $m(t)$ provenant d'un \textbf{capteur de position angulaire}. En sortie du comparateur, l'écart $\varepsilon(t)$ est ajusté grâce à un \textbf{correcteur}. 
 Le correcteur, grâce à une tension de commande $u(t)$, pilote un \textbf{servo-distributeur hydraulique} dont l'objectif est de moduler le débit d'huile $q(t)$ qui permet de déplacer le \textbf{vérin}. Ce déplacement est noté $\lambda(t)$. Ce vérin permet de modifier les longueurs du \textbf{triangle} $OA_1B_1$ et donc de modifier l'angle $\alpha(t)$ de  l'habitacle.
 \fi
 
@@ -184,6 +184,21 @@ Le correcteur, grâce à une tension de commande $u(t)$, pilote un \textbf{servo
 \else
 \fi
 
+\begin{question}
+On note $K_a$ le gain de l'adaptateur et $K_c$ le gain du capteur. Quelle doit être la relation entre 
+$K_a$ et $K_c$ pour que l'écart soit nul lorsque l'angle de l'habitacle est égale à l'angl de consigne ? Proposer  nom de capteur. 
+\end{question}
+\ifprof
+\begin{corrige}
+On a $\varepsilon(t) = K_a \alpha_c(t) - K_c \alpha(t)$. 
+
+Pour que $\varepsilon(t)$ soit nul lorsque $\alpha_c(t) =  \alpha(t)$, il faut que 
+$K_a = K_c$.
+
+\end{corrige}
+\else
+\fi
+
 
 \subsection*{Modèle de connaissance}
 \ifprof
@@ -276,8 +291,8 @@ $\alpha_c(p) = \dfrac{1}{p}$ pour un échelon et $\alpha_c(p) = \dfrac{1}{p^2}$ 
 \begin{corrige}
 On a $\alpha(p)=\alpha_c(p) H(p)$. 
 Par ailleurs, 
-$\lim\limits_{t\to  +\infty}  \alpha(t) = \lim\limits_{t\to  0}  p  \alpha(p) $ 
-$= \lim\limits_{t\to  0}  p  \dfrac{1}{p} \dfrac{1}{\dfrac{S}{CRK_S K}p+1} = 1$
+$\lim\limits_{t\to  +\infty}  \alpha(t) = \lim\limits_{p\to  0}  p  \alpha(p) $ 
+$= \lim\limits_{p\to  0}  p  \dfrac{1}{p} \dfrac{1}{\dfrac{S}{CRK_S K}p+1} = 1$
 
 Quand $t$ tend vers l'infini, la valeur finale est égale à la valeur d'entrée. Le système a un écart statique nul.
 
@@ -289,8 +304,8 @@ Quand $t$ tend vers l'infini, la valeur finale est égale à la valeur d'entrée
 \ifprof
 \begin{corrige}
 $\lim\limits_{t\to  +\infty}  \alpha(t) =  $ 
-$= \lim\limits_{t\to  0}  p  \dfrac{1}{p^2} \dfrac{1}{\dfrac{S}{CRK_S K}p+1} $
-$= \lim\limits_{t\to  0}   \dfrac{1}{p} \dfrac{1}{\dfrac{S}{CRK_S K}p+1}  = +\infty$
+$= \lim\limits_{p\to  0}  p  \dfrac{1}{p^2} \dfrac{1}{\dfrac{S}{CRK_S K}p+1} $
+$= \lim\limits_{p\to  0}   \dfrac{1}{p} \dfrac{1}{\dfrac{S}{CRK_S K}p+1}  = +\infty$
 
 On ne peut pas conclure. Il faudrait calculer 
 $\lim\limits_{t\to  +\infty}  \alpha_c(t) - \alpha(t)$.

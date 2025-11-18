@@ -18,7 +18,7 @@
 
 \marginnote{\textit{Concours CCINP MP 2018.}}
 %\marginnote{\UPSTIcompetence[2]{B2-07}}
-\marginnote{\xpComp{SLCI}{02}\xpComp{SLCI}{07}\xpComp{SLCI}{08}}
+\marginnote{\xpComp{SLCI}{02}\xpComp{SLCI}{03}\xpComp{SLCI}{07}\xpComp{SLCI}{08}}
 
 \begin{marginfigure}
 \centering
@@ -70,7 +70,7 @@ d’alimentation du moteur $\indice{u}{m}(t)$ par l’ensemble correcteur-variat
 \fi
 
 
-\begin{question}
+\begin{question} \label{cy_13_ch_03_td_01_q01}
 Compléter le schéma-blocs fonctionnel en indiquant dans les blocs
 le nom des composants (moteur, adaptateur, correcteur-variateur, capteur-conditionneur) et les
 paramètres qui transitent entre les blocs.
@@ -242,28 +242,79 @@ $E(p) = k_e\Omega_m(p)$.
 \fi
 
 
-\marginnote{\textit{Indications : il y a 3 blocs dans la chaîne directe et un seul dans la chaîne de retour; l'entrée du schéma est $U_m(p)$, la sortie est $\Omega_m(p)$.}}\question{Réaliser le schéma bloc du moteur.Le moteur à courant continu seul est-il asservi ? Pourquoi ?}
+\question{Réaliser le schéma bloc du moteur. Le moteur à courant continu seul est-il asservi ? Pourquoi ?}
+\marginnote{\textit{Indications : il y a 3 blocs dans la chaîne directe et un seul dans la chaîne de retour; l'entrée du schéma est $U_m(p)$, la sortie est $\Omega_m(p)$.}}
 \ifprof
 \begin{corrige}
+
+
+\footnotesize
+%\begin{figure}[!h]
+\begin{center}
+
+\begin{tikzpicture}
+\sbEntree{E}
+%
+%\sbBloc[5]{b0}{Adapt.}{E}
+%    \sbRelier[$\omega_{\text{cons}}(t)$]{E}{b0}
+
+\sbComp{c1}{E}
+    \sbRelier[$U_m(p)$]{E}{c1}
+
+\sbBloc{b1}{$\dfrac{1}{R+Lp}$}{c1}
+    \sbRelier{c1}{b1}
+    
+\sbBloc[4]{b2}{$k_c$}{b1}
+    \sbRelier[$I(p)$]{b1}{b2}
+
+
+\sbSumh[6]{c2}{b2}
+    \sbRelier[$C_m(p)$]{b2}{c2}
+
+%\draw[latex−](c2)|−++(−3em,3em)node[left]{$C_r(p)$};
+%\draw(c2)(−3em,3em)node[left]{$C_r(p)$};
+
+\draw [latex-](c2)|- ++ (-3em,3em) node[left]{$C_r(p)$};
+
+\sbBloc[3]{b3}{$\dfrac{1}{Jp}$}{c2}
+    \sbRelier{c2}{b3}
+
+\sbSortie[4]{S}{b3}
+    \sbRelier{b3}{S}
+    \sbNomLien[0.8]{S}{$\Omega_m(p)$}
+  
+%\sbRenvoi{b2-S}{c1}{}
+
+
+%% BLOC DE RETOUR ET RENVOI
+\sbDecaleNoeudy[4]{b3}{n1} 
+\sbDecaleNoeudx[0]{n1}{n2} 
+
+\sbBlocr{r}{$k_e$}{n2} 
+\sbRelieryx{b3-S}{r}
+\sbRelierxy[$E(p)$]{r}{c1}
+%%%%
+
+\end{tikzpicture}
+\end{center}
+
+
 Le moteur à courant continu seul ne possède pas de capteur. Il n'y a donc pas de grandeur asservie
 \end{corrige}
 \else
 \fi
 
-\begin{question}
+\begin{question}\label{cy_13_ch_03_td_01_q06}
 En supposant le couple résistant nul, $c_r(t) = 0$, donner la forme canonique de la fonction de
 transfert  sous la forme $H_m(p) = \ordredeux$. On exprimera les constantes en fonction de $R$, $L$, $k_e$, $k_c$ et $J$.
 \end{question}
 \ifprof
 \begin{corrige}
-On a $U_m(p) = RI(p) + L pI(p) + E(p)$
-$ =  \dfrac{C_m(p)}{k_c} \left(R+ Lp\right) + k_e\Omega_m(p) $
-$ =  Jp\dfrac{\Omega_m(p)}{k_c} \left(R+ Lp\right) + k_e\Omega_m(p) $.
+On utilise la formule de Black et on a :
+$H_m(p)=\dfrac{\dfrac{1}{R+Lp}\dfrac{k_c}{Jp}}{1+k_e\dfrac{1}{R+Lp}\dfrac{k_c}{Jp}}$
+$=\dfrac{k_c}{\left(R+Lp\right)Jp+k_ck_e}$
 
-On a donc 
-$U_m(p) =\Omega_m(p)\left(\dfrac{Jp}{k_c} \left(R+ Lp\right) + k_e\right) $ 
-et $H_m(p)=\dfrac{1}{\dfrac{JL}{k_c}p^2 +\dfrac{JR}{k_c}p + k_e}$
-$=\dfrac{\dfrac{1}{k_e}}{\dfrac{JL}{k_ck_e}p^2 +\dfrac{JR}{k_ck_e}p + 1}$.
+En mettant sous forme canoniquen, on a alors $H_m(p)=\dfrac{\dfrac{1}{k_e}}{\dfrac{JL}{k_ck_e}p^2 +\dfrac{JR}{k_ck_e}p + 1}$.
 
 Par identification, on a donc $K= \dfrac{1}{k_e}$, $\omega_0 =\sqrt{ \dfrac{k_ck_e}{JL}}$ et
 $\dfrac{2\xi}{\omega_0}= \dfrac{JR}{k_ck_e}$ soit $\xi =  \dfrac{JR}{2 k_ck_e}\sqrt{ \dfrac{k_ck_e}{JL}} = $
@@ -283,19 +334,62 @@ correcteur permettant de vérifier l’exigence 1.2.2.1.
 
 \ifprof
 \else
+\fi
+
 Le correcteur de l’asservissement en vitesse du moteur est un proportionnel-intégrateur de fonction
 de transfert $\indice{H}{cor}(p) = K_p+\dfrac{K_i}{p}$.
 
+Toutes les fonction de transfert introduires dans la question \ref{cy_13_ch_03_td_01_q01} sont maintenant connues. On conserve $H_m(p)$ sous la forme introduite question \ref{cy_13_ch_03_td_01_q06}.
 %La fonction de transfert en boucle fermée est donnée par 
 %$\indice{H}{BF}(p) = \dfrac{\Omega_m(p)}{\indice{\Omega}{cons}(p)} =  \dfrac{K_c\indice{H}{cor}(p) K}{1+\dfrac{2\xi}{\omega_0}p+\dfrac{p^2}{\omega_0^2}+ \indice{H}{cor}(p) K_c}$
 
 \question{Déterminer la fonction de transfert en boucle fermée notée $\indice{H}{BF}(p) = \dfrac{\Omega_m(p)}{\indice{\Omega}{cons}(p)}$.}
+\ifprof
+\begin{corrige}
+On a $\indice{H}{cor}(p) =\dfrac{K_p p + K_i }{p}$.
+
+En utilisant la formule de Black, on a 
+$\indice{H}{BF}(p) = K_a \dfrac{\indice{H}{cor}(p) H_m(p)}{1+\indice{H}{cor}(p) H_m(p)K_a}$
+$= K_a \dfrac{\dfrac{K_p p + K_i }{p} \ordredeux}{1+\dfrac{K_p p + K_i }{p} \ordredeux K_a}$
+$=\dfrac{ K_a K \left(K_p p + K_i\right)}{p\left( 1+\dfrac{2\xi}{\omega_0}p+\dfrac{p^2}{\omega_0^2}\right)+\left(K_p p + K_i \right)K K_a}$
+$=\dfrac{ K_a K \left(K_p p + K_i\right)}{p\left( 1+\dfrac{2\xi}{\omega_0}p+\dfrac{p^2}{\omega_0^2}\right)+K_p K K_a p + K_iK K_a}$
+$=\dfrac{ K_a K \left(K_p p + K_i\right)}{p\left( 1+\dfrac{2\xi}{\omega_0}p+\dfrac{p^2}{\omega_0^2}\right)+K_p K K_a p + K_iK K_a}$
+
+\end{corrige}
+\else
+\fi
 
 \question{Mettre $\indice{H}{BF}(p)$ sous forme canonique. Donner son gain statique, son ordre et sa classe.}
+\ifprof
+\begin{corrige}
+$\indice{H}{BF}(p)=\dfrac{  \left(\dfrac{K_p}{K_i} p + 1\right)}{\dfrac{p}{K_iK K_a}\left( 1+\dfrac{2\xi}{\omega_0}p+\dfrac{p^2}{\omega_0^2}\right)+\dfrac{K_p}{K_i} p + 1}$. Le gain est unitaire, l'ordre est 3, la classe est nulle.
+
+\end{corrige}
+\else
+\fi
 
 \question{Déterminer la valeur finale de $\omega_m(t)$ pour une entrée indicielle. Conclure vis-à-vis du cahier des charges}
+\ifprof
+\begin{corrige}
+On a $\lim\limits_{t\to  +\infty}  \omega_m(t)= \lim\limits_{p\to  0}  p \omega_m(p)  $
+$= \lim\limits_{p\to  0}  p \indice{\omega}{cons}(p)  \indice{H}{BF}(p) $. 
+
+Pour une entrée indicielle, 
+$\indice{\omega}{cons}(p) = \dfrac{1}{p}$ soit 
+$= \lim\limits_{p\to  0}    \indice{H}{BF}(p) $
+$= 1$.
+
+Pour une entrée indicielle, la sortie vaut également 1. L'erreur est donc nulle. La précision est donc absolue, comme demandé dans l'exigence 1.2.2.1.
+\end{corrige}
+\else
+\fi
 
 \question{Déterminer la valeur finale de $\omega_m(t)$ pour une entrée rampe de pente 1.}
+\ifprof
+\begin{corrige}
+\end{corrige}
+\else
+\fi
 
 
 
@@ -304,8 +398,6 @@ de transfert $\indice{H}{cor}(p) = K_p+\dfrac{K_i}{p}$.
 Les résultats de simulation de la réponse du moteur $\indice{N}{m}(t)$, en boucle fermée, pour une entrée échelon
 d’amplitude $N_0 = \SI{3 000}{tr.min^{-1}}$ pour différentes valeurs de $K_p$ et de $K_i$ sont donnés sur la figure \ref{cy_01_ch_02_03_td_03_fig_05}.
 
-
-\fi
 
 
 \ifprof
