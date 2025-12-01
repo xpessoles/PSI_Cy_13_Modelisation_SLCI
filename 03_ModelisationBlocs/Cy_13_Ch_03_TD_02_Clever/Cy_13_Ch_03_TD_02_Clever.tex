@@ -171,18 +171,18 @@ Le correcteur, grâce à une tension de commande $u(t)$, pilote un \textbf{servo
 
 
 
-\question{Cet asservissement satisfait-il les hypothèses des SLCI (Systèmes Linéaires Continus Invariants) ?}
-\ifprof
-\begin{corrige}
-\begin{itemize}
-\item Le système est asservi car il est équipé d'un capteur et d'un sommateur qui permettent de corriger l'écart entre la consigne de l'utilisateur et le signal mesuré sur le système.
-\item Linéarité du système : la transformation géométrique du triangle n'est pas linéaire.
-\item Continuité du système : peu d'information ici, mais l'asservissement sera très certainement fait par un micocontroleur fonctionnant avec des grandeurs numériques, les CAN et les CNA peuvent remettre en question la continuité du système.
-\item Invariance du système : on fait l'hypothèse que les constantes ne varient pas au cours du temps.
-\end{itemize}
-\end{corrige}
-\else
-\fi
+%\question{Cet asservissement satisfait-il les hypothèses des SLCI (Systèmes Linéaires Continus Invariants) ?}
+%\ifprof
+%\begin{corrige}
+%\begin{itemize}
+%\item Le système est asservi car il est équipé d'un capteur et d'un sommateur qui permettent de corriger l'écart entre la consigne de l'utilisateur et le signal mesuré sur le système.
+%\item Linéarité du système : la transformation géométrique du triangle n'est pas linéaire.
+%\item Continuité du système : peu d'information ici, mais l'asservissement sera très certainement fait par un micocontroleur fonctionnant avec des grandeurs numériques, les CAN et les CNA peuvent remettre en question la continuité du système.
+%\item Invariance du système : on fait l'hypothèse que les constantes ne varient pas au cours du temps.
+%\end{itemize}
+%\end{corrige}
+%\else
+%\fi
 
 \begin{question}
 On note $K_a$ le gain de l'adaptateur et $K_c$ le gain du capteur. Quelle doit être la relation entre 
@@ -349,5 +349,13 @@ On mesure la réponse suivante.
 \end{itemize}
 \end{corrige}
 \else
+\fi
+\ifprof
+\else
+\begin{marginfigure}
+\begin{center}
+\includegraphics[width=3cm]{Cy_13_Ch_03_TD_02_Clever_qr}
+\end{center}
+\end{marginfigure}
 \fi
 

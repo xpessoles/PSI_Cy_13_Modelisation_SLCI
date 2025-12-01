@@ -162,18 +162,18 @@ paramètres qui transitent entre les blocs.
 %%%%%%%%%%%%%%%
 \fi
 
-\question{Le système est-il asservi ? Pourquoi ? Le système répond-il aux hypothèses des SLCI (Systèmes Linéaires Continus Invariants) ?}
-\ifprof
-\begin{corrige}
-\begin{itemize}
-\item Le système est asservi car il est équipé d'un capteur et d'un sommateur qui permettent de corriger l'écart entre la consigne de l'utilisateur et le signal mesuré sur le système.
-\item Linéarité du système : à ce stade, peu d'informations permettent de répondre à la question.
-\item Continuité du système : le codeur incrémental fournit une information numérique qui n'est pas continue. Sous certaines conditions, l'hypothèse de continuité pourrait être remise en question.
-\item Invariance du système : on fait l'hypothèse que les constantes ne varient pas au cours du temps.
-\end{itemize}
-\end{corrige}
-\else
-\fi
+%\question{Le système est-il asservi ? Pourquoi ? Le système répond-il aux hypothèses des SLCI (Systèmes Linéaires Continus Invariants) ?}
+%\ifprof
+%\begin{corrige}
+%\begin{itemize}
+%\item Le système est asservi car il est équipé d'un capteur et d'un sommateur qui permettent de corriger l'écart entre la consigne de l'utilisateur et le signal mesuré sur le système.
+%\item Linéarité du système : à ce stade, peu d'informations permettent de répondre à la question.
+%\item Continuité du système : le codeur incrémental fournit une information numérique qui n'est pas continue. Sous certaines conditions, l'hypothèse de continuité pourrait être remise en question.
+%\item Invariance du système : on fait l'hypothèse que les constantes ne varient pas au cours du temps.
+%\end{itemize}
+%\end{corrige}
+%\else
+%\fi
 
 \begin{question}
 On note $K_a$ le gain de l'adaptateur et $K_c$ le gain du capteur. Quelle doit être la relation entre 
@@ -384,20 +384,21 @@ Pour une entrée indicielle, la sortie vaut également 1. L'erreur est donc null
 \else
 \fi
 
-\question{Déterminer la valeur finale de $\omega_m(t)$ pour une entrée rampe de pente 1.}
-\ifprof
-\begin{corrige}
-\end{corrige}
-\else
-\fi
+%\question{Déterminer la valeur finale de $\omega_m(t)$ pour une entrée rampe de pente 1.}
+%\ifprof
+%\begin{corrige}
+%\end{corrige}
+%\else
+%\fi
 
 
 
 \subsection*{Evaluation graphique des performances}
-
+\ifprof
+\else
 Les résultats de simulation de la réponse du moteur $\indice{N}{m}(t)$, en boucle fermée, pour une entrée échelon
 d’amplitude $N_0 = \SI{3 000}{tr.min^{-1}}$ pour différentes valeurs de $K_p$ et de $K_i$ sont donnés sur la figure \ref{cy_01_ch_02_03_td_03_fig_05}.
-
+\fi
 
 
 \ifprof
@@ -506,7 +507,7 @@ Conclure sur le correcteur à adopter.
 \else
 \begin{marginfigure}
 \centering
-%\includegraphics[width=3cm]{Cy_01_Ch_02_03_TD_04_qr}
+\includegraphics[width=3cm]{Cy_13_Ch_03_TD_01_Tissus_qr}
 \end{marginfigure}
 \fi
 
