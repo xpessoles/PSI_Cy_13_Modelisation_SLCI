@@ -1,0 +1,230 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.7.19)  1 DEC 2025 22:16
+entering extended mode
+ \write18 enabled.
+ %&-line parsing enabled.
+**./Cy_13_Ch_03_TD_01_Tissus_qr.tex
+(Cy_13_Ch_03_TD_01_Tissus_qr.tex
+LaTeX2e <2024-06-01> patch level 2
+L3 programming layer <2024-05-27>
+
+(C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/latex/standalone\standalone.c
+ls
+Document Class: standalone 2022/10/10 v1.3b Class to compile TeX sub-files stan
+dalone
+(C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/latex/tools\shellesc.sty
+Package: shellesc 2023/07/08 v1.0d unified shell escape interface for LaTeX
+Package shellesc Info: Unrestricted shell escape enabled on input line 75.
+)
+(C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifluatex.sty
+Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
+
+(C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+))
+(C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/latex/xkeyval\xkeyval.sty
+Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
+
+(C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkeyval.tex
+(C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkvutils.tex
+\XKV@toks=\toks17
+\XKV@tempa@toks=\toks18
+
+(C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\keyval.tex))
+\XKV@depth=\count194
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+\sa@internal=\count195
+\c@sapage=\count196
+
+(C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/latex/standalone\standalone.c
+fg
+File: standalone.cfg 2022/10/10 v1.3b Default configuration file for 'standalon
+e' class
+) (C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2024/02/08 v1.4n Standard LaTeX document class
+(C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo
+File: size10.clo 2024/02/08 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count197
+\c@section=\count198
+\c@subsection=\count199
+\c@subsubsection=\count266
+\c@paragraph=\count267
+\c@subparagraph=\count268
+\c@figure=\count269
+\c@table=\count270
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen141
+)
+\sa@box=\box52
+)
+(C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/latex/fancyqr\fancyqr.sty
+Package: fancyqr 2024/04/13 version v2.0 Fancy QR-Codes
+
+(C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/latex/pict2e\pict2e.sty
+Package: pict2e 2020/09/30 v0.4b Improved picture commands (HjG,RN,JT)
+
+(C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/latex/pict2e\pict2e.cfg
+File: pict2e.cfg 2016/02/05 v0.1u pict2e configuration for teTeX/TeXLive
+)
+Package pict2e Info: Driver file: pdftex.def on input line 112.
+
+(C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
+)
+Package pict2e Info: Driver file for pict2e: p2e-pdftex.def on input line 114.
+ (C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/latex/pict2e\p2e-pdftex.def
+File: p2e-pdftex.def 2016/02/05 v0.1u Driver-dependant file (RN,HjG,JT)
+) (C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+)
+\pIIe@GRAPH=\toks19
+\@arclen=\dimen142
+\@arcrad=\dimen143
+\pIIe@tempdima=\dimen144
+\pIIe@tempdimb=\dimen145
+\pIIe@tempdimc=\dimen146
+\pIIe@tempdimd=\dimen147
+\pIIe@tempdime=\dimen148
+\pIIe@tempdimf=\dimen149
+)
+(C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/xfp\xfp.sty
+(C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\expl3.sty
+Package: expl3 2024-05-27 L3 programming layer (loader) 
+
+(C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
+tex.def
+File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count271
+\l__pdf_internal_box=\box53
+))
+Package: xfp 2024-05-08 L3 Floating point unit
+)
+(C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/latex/qrcode\qrcode.sty
+Package: qrcode 2015/01/08 v1.51 QR code generation
+
+(C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+Package: xcolor 2023/11/15 v3.01 LaTeX color extensions (UK)
+
+(C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+(C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1350.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1354.
+Package xcolor Info: Model `RGB' extended on input line 1366.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1368.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1371.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1372.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1373.
+)
+\c@qr@i=\count272
+\c@qr@j=\count273
+\qr@a=\count274
+\qr@b=\count275
+\qr@c=\count276
+\qr@for@depth=\count277
+\qr@for@maxdepth=\count278
+\qr@for@start=\count279
+\qr@for@end=\count280
+\qr@for@step=\count281
+\qr@newforcount=\count282
+\qr@newforcount=\count283
+\qr@desiredheight=\skip51
+\qr@modulesize=\skip52
+\qr@minipagewidth=\skip53
+\c@maski=\count284
+\c@maskj=\count285
+\c@totalones=\count286
+\c@penaltyi=\count287
+\c@penaltyii=\count288
+\c@penaltyiii=\count289
+\c@penaltyiv=\count290
+\c@qr@hexchars=\count291
+\qr@newforcount=\count292
+\c@qr@divisionsremaining=\count293
+)
+\fancyqr@edge@compensate=\dimen150
+\c@fancy@a=\count294
+\c@fancy@b=\count295
+\fancyqr@imgbox=\box54
+) (Cy_13_Ch_03_TD_01_Tissus_qr.aux
+<Reading QR code for "http://xpessoles-cpge.fr/pdf/Cy_13_Ch_03_TD_01_Tissus_Cor
+rige.pdf" at level 8-H from aux file.>
+)
+\openout1 = `Cy_13_Ch_03_TD_01_Tissus_qr.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+
+(C:\Users\xpess\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
+ii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count296
+\scratchdimen=\dimen151
+\scratchbox=\box55
+\nofMPsegments=\count297
+\nofMParguments=\count298
+\everyMPshowfont=\toks20
+\MPscratchCnt=\count299
+\MPscratchDim=\dimen152
+\MPnumerator=\count300
+\makeMPintoPDFobject=\count301
+\everyMPtoPDFconversion=\toks21
+)
+
+
+<QR code requested for "http://xpessoles-cpge.fr/pdf/Cy_13_Ch_03_TD_01_Tissus_C
+orrige.pdf" in version 0-H.>
+
+<Copying the QR code for "http://xpessoles-cpge.fr/pdf/Cy_13_Ch_03_TD_01_Tissus
+_Corrige.pdf" in version 8-H as previously calculated.>
+\qr@newforcount=\count302
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 5.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 5.
+
+
+[1
+
+] (Cy_13_Ch_03_TD_01_Tissus_qr.aux
+<Reading QR code for "http://xpessoles-cpge.fr/pdf/Cy_13_Ch_03_TD_01_Tissus_Cor
+rige.pdf" at level 8-H from aux file.>
+)
+ ***********
+LaTeX2e <2024-06-01> patch level 2
+L3 programming layer <2024-05-27>
+ ***********
+ ) 
+Here is how much of TeX's memory you used:
+ 6468 strings out of 473904
+ 97587 string characters out of 5726600
+ 2454908 words of memory out of 5000000
+ 29342 multiletter control sequences out of 15000+600000
+ 558069 words of font info for 36 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 79i,7n,93p,2634b,2377s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+Output written on Cy_13_Ch_03_TD_01_Tissus_qr.pdf (1 page, 8952 bytes).
+PDF statistics:
+ 6 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

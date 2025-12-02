@@ -1,0 +1,58 @@
+% "{'chapitre':'slci_ordre_1_2','classe':('PCSI','PTSI'),'type':('td'),'titre':'Laminoir Sendzimir', 'source':'JP Pupier','comp':['B2-07','SLCI-02','SLCI-07','SLCI-08'],'corrige':False}"
+\setchapterimage{fig_00}
+
+\renewcommand{\titrechapitre}{Laminoir Sendzimir}
+
+\chapter*{TD \arabic{cptTD} \\ 
+\titrechapitre\,-- \ifprof Corrigé \else Sujet \fi}
+\addcontentsline{toc}{section}{TD \arabic{cptTD} : \titrechapitre -- \ifprof Corrigé \else Sujet \fi}
+
+\iflivret \stepcounter{cptTD} \else
+\ifprof  \stepcounter{cptTD} \else \fi \fi
+
+\renewcommand{\leftmark}{\titrechapitre}
+\renewcommand{\rightmark}{\titrechapitre}
+
+
+\setcounter{question}{0}
+
+\marginnote{\textit{Ressources JP Pupier.}}
+%\marginnote{\UPSTIcompetence[2]{B2-07}}
+\marginnote{\xpComp{SLCI}{02}\xpComp{SLCI}{03}\xpComp{SLCI}{07}\xpComp{SLCI}{08}}
+
+
+
+
+
+\ifprof
+\else
+\begin{marginfigure}
+\centering
+%\includegraphics[width=3cm]{Cy_01_Ch_02_03_TD_04_qr}
+\end{marginfigure}
+\fi
+
+\ifcolle
+\else
+\ifprof
+\else
+%\marginnote{
+\begin{solution}
+\begin{enumerate}[wide, labelwidth=!, labelindent=0pt]
+\item .
+\item $K_a = K_c$.
+\item .
+\item $K= \dfrac{1}{k_e}$, $\omega_0 =\sqrt{ \dfrac{k_ck_e}{JL}}$ et
+$\xi =  \dfrac{R\sqrt{J}}{2 \sqrt{L k_ck_e}} $.
+\item La courbe 2 a la plus grande valeur de $K_p$.
+\item $K_i\neq 0 $ pour la courbe 3 uniquemement.
+\item .
+\end{enumerate}
+\end{solution}
+%}
+\fi
+\fi
+
+
+
+
